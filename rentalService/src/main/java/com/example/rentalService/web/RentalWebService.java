@@ -14,25 +14,24 @@ public class RentalWebService {
     private final RentalService rentalService = new RentalService();
     Logger logger = LoggerFactory.getLogger(RentalWebService.class);
 
-    // Liste toutes les voitures disponibles (non louées)
     @GetMapping("/cars")
     public List<Car> listOfCars() {
         return rentalService.getAvailableCars();
     }
 
-    // Liste toutes les voitures (louées ou non)
+   
     @GetMapping("/cars/all")
     public List<Car> listAllCars() {
         return rentalService.getAllCars();
     }
 
-    // Retourne une voiture en fonction de son numéro de plaque
+    
     @GetMapping("/cars/{plateNumber}")
     public Car getCar(@PathVariable("plateNumber") String plateNumber) throws Exception {
         return rentalService.getCarByPlate(plateNumber);
     }
 
-    // Loue ou retourne une voiture en fonction de son état
+    
     @PutMapping("/cars/{plateNumber}")
     @ResponseStatus(HttpStatus.OK)
     public void rentOrReturnCar(
